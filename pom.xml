@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.github.ddth</groupId>
+		<artifactId>ddth-parent</artifactId>
+		<version>5.1</version>
+	</parent>
+
+	<groupId>com.github.ddth</groupId>
+	<artifactId>ddth-lock</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>ddth-lock</name>
+	<description>DDTH's API for shared lock(s)</description>
+	<url>https://github.com/DDTH/ddth-lock</url>
+
+	<modules>
+		<module>ddth-lock-core</module>
+		<module>ddth-lock-zk</module>
+	</modules>
+
+	<licenses>
+		<license>
+			<name>The MIT License (MIT)</name>
+			<url>http://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>git@github.com:DDTH/ddth-lock</url>
+		<connection>scm:git:git@github.com:DDTH/ddth-lock</connection>
+		<developerConnection>scm:git:git@github.com:DDTH/ddth-lock</developerConnection>
+	</scm>
+	<developers>
+		<developer>
+			<id>btnguyen2k</id>
+			<name>Thanh Ba Nguyen</name>
+			<email>btnguyen2k@gmail.com</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<skipTests>true</skipTests>
+
+		<version.ddth_zookeeper>0.4.1.2</version.ddth_zookeeper>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>sonatype-org</id>
+			<name>Sonatype Releases</name>
+			<url>http://oss.sonatype.org/content/repositories/releases/</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+	<!-- for Zookeeper-based locks -->
+	<dependency>
+		<groupId>com.github.ddth</groupId>
+		<artifactId>ddth-zookeeper</artifactId>
+		<version>${version.ddth_zookeeper}</version>
+		<optional>true</optional>
+	</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<forkMode>always</forkMode>
+					<skipTests>${skipTests}</skipTests>
+					<systemPropertyVariables>
+						<!-- <log4j.configuration>file:${basedir}/../etc/log4j.xml</log4j.configuration> -->
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
